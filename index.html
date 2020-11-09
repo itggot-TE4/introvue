@@ -46,7 +46,7 @@
             methods: {
                deleteItem(index) {
                   console.log("delete item: " + index);
-                  console.log(this.$parent.items.indexOf(index));
+                  this.$parent.items.splice(this.$parent.items.indexOf(index), 1);
                }
             },
             template: `#item-template`
