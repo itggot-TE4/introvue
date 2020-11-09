@@ -13,6 +13,7 @@
       
    </div>
 </body>
+<template id="hello-world-template"><h1>{{text}}</h1></template>
 <script>
    const { createApp } = Vue;
 
@@ -22,7 +23,7 @@
             text: "Hello, World!",
          };
       },
-      template: `<h1>{{text}}</h1>`
+      template: `#hello-world-template`
    };
 
    createApp(App).mount("#main");
