@@ -10,7 +10,7 @@
 
 <body>
    <div id="main">
-      <h1>{{text}}</h1>
+      
    </div>
 </body>
 <script>
@@ -22,6 +22,7 @@
             text: "Hello, World!",
          };
       },
+      template: `<h1>{{text}}</h1>`
    };
 
    createApp(App).mount("#main");
