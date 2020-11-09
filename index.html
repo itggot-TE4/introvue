@@ -18,7 +18,7 @@
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
-<template id="item-template"><li>{{index}} <button @click="deleteItem">X</button></li></template>
+<template id="item-template"><li>{{index}} <button @click="deleteItem('test')">X</button></li></template>
 <script>
    const { createApp } = Vue;
 
@@ -44,8 +44,8 @@
          item: {
             props: ['index'],
             methods: {
-               deleteItem() {
-                  console.log("delete item")
+               deleteItem(test) {
+                  console.log("delete item: " + test)
                }
             },
             template: `#item-template`
