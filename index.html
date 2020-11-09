@@ -12,7 +12,7 @@
    <div id="main">
       <component :text="text" :is="'hello'"></component>
       <ul>
-         <component v-for="index in items" :index="index" :is="'item'"></component>
+         <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
    </div>
 </body>
