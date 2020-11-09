@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue.js intro</title>
-    <script src="https://unpkg.com/vue@next"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Vue.js intro</title>
+   <script src="https://unpkg.com/vue@next"></script>
 </head>
+
 <body>
-    <div id="main">
-        <h1>Helo, World!</h1>
-    </div>
+   <div id="main">
+      <h1>Helo, World!</h1>
+   </div>
 </body>
 <script>
-    const { createApp } = Vue;
+   const { createApp } = Vue;
 
-    const App = {};
+   const App = {
+      data() {
+         return {
+            text: "Hello, World!",
+         };
+      },
+   };
 
-    createApp(App).mount("#main");
+   createApp(App).mount("#main");
 </script>
+
 </html>
