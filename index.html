@@ -18,7 +18,7 @@
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
-<template id="item-template"><li>{{index}} <button @click="deleteItem('test')">X</button></li></template>
+<template id="item-template"><li>{{index}} <button @click="deleteItem(index)">X</button></li></template>
 <script>
    const { createApp } = Vue;
 
@@ -44,8 +44,9 @@
          item: {
             props: ['index'],
             methods: {
-               deleteItem(test) {
-                  console.log("delete item: " + test)
+               deleteItem(index) {
+                  console.log("delete item: " + index);
+                  console.log(this.$parent.items.indexOf(index));
                }
             },
             template: `#item-template`
