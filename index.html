@@ -12,9 +12,7 @@
    <div id="main">
       <component :text="text" :is="'hello'"></component>
       <ul>
-         <component index="1" :is="'item'"></component>
-         <component index="2" :is="'item'"></component>
-         <component index="3" :is="'item'"></component>
+         <component v-for="index in items" :index="index" :is="'item'"></component>
       </ul>
    </div>
 </body>
@@ -26,6 +24,7 @@
       data() {
          return {
             text: "Hello, World!",
+            items: [1, 2, 3]
          };
       },
       components: {
