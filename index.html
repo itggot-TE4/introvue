@@ -10,7 +10,7 @@
 
 <body>
    <div id="main">
-      <component text="text" v-bind:is="'hello'"></component>
+      <component :text="text" :is="'hello'"></component>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
