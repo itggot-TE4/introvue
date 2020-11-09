@@ -13,7 +13,7 @@
       <component v-bind:is="'hello'"></component>
    </div>
 </body>
-<template id="hello-world-template"><h1>{{text}}</h1></template>
+<template id="hello-world-template"><h1>{{$parent.text}}</h1></template>
 <script>
    const { createApp } = Vue;
 
