@@ -12,7 +12,7 @@
    <div id="main">
       <component :text="text" :is="'hello'"></component>
       <ul>
-         <component :is="'item'"></component>
+         <component index="1" :is="'item'"></component>
       </ul>
    </div>
 </body>
@@ -32,11 +32,7 @@
             template: `#hello-world-template`
          },
          item: {
-            data() {
-               return {
-                  index: 1,
-               }
-            },
+            props: ['index'],
             template: `<li>{{index}}</li>`
          }
       }
