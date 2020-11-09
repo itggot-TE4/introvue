@@ -18,6 +18,7 @@
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
+<template id="item-template"><li>{{index}}</li></template>
 <script>
    const { createApp } = Vue;
 
@@ -42,7 +43,7 @@
          },
          item: {
             props: ['index'],
-            template: `<li>{{index}}</li>`
+            template: `#item-template`
          }
       }
    };
