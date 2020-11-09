@@ -14,6 +14,7 @@
       <ul>
          <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
+      <button>add</button>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
@@ -26,6 +27,11 @@
             text: "Hello, World!",
             items: [1, 2, 3]
          };
+      },
+      methods: {
+         onClick() {
+            console.log("clicked!");
+         }
       },
       components: {
          hello: {
