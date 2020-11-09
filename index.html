@@ -10,7 +10,7 @@
 
 <body>
    <div id="main">
-      
+      <component v-bind:is="'hello'"></component>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
@@ -23,7 +23,9 @@
             text: "Hello, World!",
          };
       },
-      template: `#hello-world-template`
+      components: {
+         hello: {template: `#hello-world-template`}
+      }
    };
 
    createApp(App).mount("#main");
