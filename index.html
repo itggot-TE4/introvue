@@ -10,10 +10,10 @@
 
 <body>
    <div id="main">
-      <component v-bind:is="'hello'"></component>
+      <component text="text" v-bind:is="'hello'"></component>
    </div>
 </body>
-<template id="hello-world-template"><h1>{{$parent.text}}</h1></template>
+<template id="hello-world-template"><h1>{{text}}</h1></template>
 <script>
    const { createApp } = Vue;
 
@@ -24,7 +24,10 @@
          };
       },
       components: {
-         hello: {template: `#hello-world-template`}
+         hello: {
+            props: ['text'],
+            template: `#hello-world-template`
+         }
       }
    };
 
