@@ -14,7 +14,9 @@
       <ul>
          <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
+      <input type="text">
       <button @click="onClick">add</button>
+      <p>{{title}}</p>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
@@ -27,7 +29,8 @@
          return {
             text: "Hello, World!",
             items: [1, 2, 3],
-            counter: 3
+            counter: 3,
+            title: ""
          };
       },
       methods: {
