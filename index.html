@@ -14,7 +14,7 @@
       <ul>
          <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
-      <button>add</button>
+      <button v-on:click="onClick">add</button>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
