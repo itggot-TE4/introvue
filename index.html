@@ -14,7 +14,7 @@
       <ul>
          <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
-      <input type="text">
+      <input v-model="title" type="text">
       <button @click="onClick">add</button>
       <p>{{title}}</p>
    </div>
