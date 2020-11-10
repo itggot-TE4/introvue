@@ -25,6 +25,7 @@
    const { createApp } = Vue;
 
    const App = {
+      name: "App",
       data() {
          return {
             text: "Hello, World!",
@@ -41,6 +42,7 @@
       },
       components: {
          item: {
+            name: 'item',
             props: ['index'],
             methods: {
                deleteItem(index) {
@@ -56,6 +58,7 @@
    const app = createApp(App);
 
    app.component('Hello', {
+      name: 'Hello',
       props: ['text'],
       template: `#hello-world-template`
    });
