@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TodoFilter @filter-todos="onFilterTodos" />
+    <TodoFilter :showTodos="showTodos" @filter-todos="onFilterTodos" />
     <TodoItem
       v-for="todoItem in todoItems"
       v-show="!todoItem.isFiltered"
@@ -22,6 +22,7 @@ export default {
   name: "Home",
   data() {
     return {
+      showTodos: true,
       todoItems: [
         {
           id: 0,
@@ -54,11 +55,11 @@ export default {
       }));
     },
     onDelTodo(id) {
-        this.todoItems = this.todoItems.filter(f => f.id !== id);
+      this.todoItems = this.todoItems.filter(f => f.id !== id);
     },
     onToggleCompleted(id) {
-        const todoItem = this.todoItems.find(f => f.id == id);
-        todoItem.isDone = !todoItem.isDone;
+      const todoItem = this.todoItems.find(f => f.id == id);
+      todoItem.isDone = !todoItem.isDone;
     }
   },
   components: {

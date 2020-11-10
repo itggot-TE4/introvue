@@ -9,10 +9,10 @@
 <script>
 export default {
   name: "TodoFilter",
+  props: ['showTodos'],
   data() {
      return {
-        filter: "",
-        showTodos: true
+        filter: ""
      }
   },
   methods: {
