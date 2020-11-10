@@ -35,13 +35,18 @@ app.component('Hello', {
 app.component('Item', {
     name: 'item',
     props: ['index', 'title'],
+    data() {
+        return {
+            done: false
+        }
+    },
     methods: {
         deleteItem(index) {
             console.log("delete item: " + index);
             this.$emit('delete_item', index)
         },
-        markComplete(index) {
-            console.log(index);
+        markComplete() {
+            this.done = true;
         }
     },
     template: `#item-template`
