@@ -5,7 +5,7 @@
       :key="todoItem.id"
       :todoItem="todoItem"
     />
-    <TodoForm />
+    <TodoForm @add-todo="onAddTodo" />
   </div>
 </template>
 
@@ -26,8 +26,18 @@ export default {
           id: 1,
           title: "clean my kitchen..."
         }
-      ]
+      ],
+      counter: 2
     };
+  },
+  methods: {
+    onAddTodo(title) {
+      console.log(title);
+      this.todoItems.push({
+        id: this.counter++,
+        title: title
+      });
+    }
   },
   components: {
     TodoItem,

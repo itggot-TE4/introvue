@@ -1,6 +1,6 @@
 <template>
    <form> 
-      <input type="text" name="title">
+      <input v-model="title" type="text" name="title">
       <button @click.prevent="createTodo">Create Todo</button>
    </form>
 </template>
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
      createTodo() {
-        console.log("created!");
+        this.$emit('add-todo', this.title);
      }
   }
 };
