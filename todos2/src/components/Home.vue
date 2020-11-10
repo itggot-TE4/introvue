@@ -3,6 +3,7 @@
     <TodoFilter @filter-todos="onFilterTodos"/>
     <TodoItem
       v-for="todoItem in todoItems"
+      v-show="!todoItem.isFiltered"
       :key="todoItem.id"
       :todoItem="todoItem"
     />
@@ -22,7 +23,8 @@ export default {
       todoItems: [
         {
           id: 0,
-          title: "write code"
+          title: "write code",
+          isFiltered: false
         },
         {
           id: 1,
@@ -41,7 +43,9 @@ export default {
       });
     },
     onFilterTodos(filter) {
-        console.log(filter);
+        this.todoItems.forEach(todoItem => {
+            todoItem.isFiltered = todoItem.title.includes(filter);
+        })
     }
   },
   components: {
