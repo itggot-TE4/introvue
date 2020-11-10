@@ -28,7 +28,8 @@ export default {
         },
         {
           id: 1,
-          title: "clean my kitchen..."
+          title: "clean my kitchen...",
+          isFiltered: false
         }
       ],
       counter: 2
@@ -44,7 +45,7 @@ export default {
     },
     onFilterTodos(filter) {
         this.todoItems.forEach(todoItem => {
-            todoItem.isFiltered = todoItem.title.includes(filter);
+            todoItem.isFiltered = !todoItem.title.includes(filter);
         })
     }
   },

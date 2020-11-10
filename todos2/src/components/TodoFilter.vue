@@ -1,5 +1,5 @@
 <template> 
-    <input v-model="filter" type="text">
+    <input @keyup="filterTodos" v-model="filter" type="text">
 </template>
 
 <script>
