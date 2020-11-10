@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <TodoFilter @filter-todos="onFilterTodos"/>
+    <TodoFilter @filter-todos="onFilterTodos" />
     <TodoItem
       v-for="todoItem in todoItems"
       v-show="!todoItem.isFiltered"
@@ -44,9 +44,10 @@ export default {
       });
     },
     onFilterTodos(filter) {
-        this.todoItems.forEach(todoItem => {
-            todoItem.isFiltered = !todoItem.title.includes(filter);
-        })
+      this.todoItems = this.todoItems.map(m => ({
+        ...m,
+        isFiltered: !m.title.includes(filter)
+      }));
     }
   },
   components: {
