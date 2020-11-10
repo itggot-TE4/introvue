@@ -12,58 +12,13 @@
    <div id="main">
       <Hello :text="text"></Hello>
       <ul>
-         <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
+         <Item @delete_item="deleteItem" v-for="item in items" :key="item.index" :index="item.index" :title="item.title"></Item>
       </ul>
       <input v-model="title" type="text">
       <button @click="onClick">add</button>
-      <p>{{title}}</p>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
-<template id="item-template"><li>{{index}} <button @click="deleteItem(index)">X</button></li></template>
-<script>
-   const { createApp } = Vue;
-
-   const App = {
-      name: "App",
-      data() {
-         return {
-            text: "Hello, World!",
-            items: [1, 2, 3],
-            counter: 3,
-            title: ""
-         };
-      },
-      methods: {
-         onClick() {
-            console.log("clicked!");
-            this.items.push(++this.counter);
-         }
-      },
-      components: {
-         item: {
-            name: 'item',
-            props: ['index'],
-            methods: {
-               deleteItem(index) {
-                  console.log("delete item: " + index);
-                  this.$parent.items.splice(this.$parent.items.indexOf(index), 1);
-               }
-            },
-            template: `#item-template`
-         }
-      }
-   };
-
-   const app = createApp(App);
-
-   app.component('Hello', {
-      name: 'Hello',
-      props: ['text'],
-      template: `#hello-world-template`
-   });
-
-   app.mount("#main");
-</script>
-
+<template id="item-template"><li>{{title}} <button @click="deleteItem(index)">X</button></li></template>
+<script src="index.js"></script>
 </html>
