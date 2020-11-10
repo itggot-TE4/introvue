@@ -16,6 +16,7 @@
 <body>
    <div id="main">
       <Hello :text="text"></Hello>
+      <input v-model="search" placeholder="search... seek... find..." type="text">
       <ul>
          <Item @delete_item="deleteItem" v-for="item in items" :key="item.index" :index="item.index" :title="item.title"></Item>
       </ul>

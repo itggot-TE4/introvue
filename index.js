@@ -7,6 +7,7 @@ const App = {
             text: "Hello, World!",
             items: [{index: 0, title: 'test'}],
             counter: 1,
+            search: "",
             title: ""
         };
     },
