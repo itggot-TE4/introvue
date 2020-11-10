@@ -1,7 +1,7 @@
 <template>
   <li>
     <input @change="$emit('toggle-completed', todoItem.id)" type="checkbox" />
-    <span>{{ todoItem.title }}</span>
+    <span :class="{ 'is-complete': todoItem.isDone }">{{ todoItem.title }}</span>
     <button @click="$emit('del-todo', todoItem.id)">X</button>
     {{ todoItem.title }}
   </li>
@@ -13,3 +13,9 @@ export default {
   props: ["todoItem"]
 };
 </script>
+
+<style>
+.is-complete {
+  text-decoration: line-through;
+}
+</style>
