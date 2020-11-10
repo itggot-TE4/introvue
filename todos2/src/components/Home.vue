@@ -55,7 +55,7 @@ export default {
     onFilterTodos(filter) {
       this.todoItems = this.todoItems.map(m => ({
         ...m,
-        isFiltered: !m.title.includes(filter)
+        isFiltered: !m.title.includes(filter) || (!this.showTodos && m.isDone)
       }));
     },
     onDelTodo(id) {
