@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <TodoFilter @filter-todos="onFilterTodos"/>
     <TodoItem
       v-for="todoItem in todoItems"
       :key="todoItem.id"
@@ -12,6 +13,7 @@
 <script>
 import TodoItem from "./TodoItem.vue";
 import TodoForm from "./TodoForm.vue";
+import TodoFilter from "./TodoFilter.vue";
 
 export default {
   name: "Home",
@@ -37,11 +39,15 @@ export default {
         id: this.counter++,
         title: title
       });
+    },
+    onFilterTodos(filter) {
+        console.log(filter);
     }
   },
   components: {
     TodoItem,
-    TodoForm
+    TodoForm,
+    TodoFilter
   }
 };
 </script>
