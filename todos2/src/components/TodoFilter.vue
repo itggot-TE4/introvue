@@ -2,7 +2,7 @@
     <input @keyup="filterTodos" v-model="filter" type="text">
     <div>
         <span>Show all todos</span>
-        <input v-model="showTodos" type="checkbox" />
+        <input :checked="showTodos" @change="toggleShowTodos" type="checkbox" />
     </div>
 </template>
 
@@ -18,6 +18,9 @@ export default {
   methods: {
      filterTodos() {
         this.$emit('filter-todos', this.filter);
+     },
+     toggleShowTodos() {
+         this.$emit('toggle-show-todos');
      }
   }
 };
