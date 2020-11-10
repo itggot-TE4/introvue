@@ -1,16 +1,12 @@
 <template>
   <li>
-     {{title}}
+     {{todoItem.title}}
   </li>
 </template>
 
 <script>
 export default {
   name: "TodoItem",
-  data() {
-     return {
-        title: "Hello, World!"
-     }
-  }
+  props: ['todoItem']
 };
 </script>

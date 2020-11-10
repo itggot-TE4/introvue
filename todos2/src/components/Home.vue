@@ -1,7 +1,8 @@
 <template>
   <div class="home">
       <TodoItem v-for="todoItem in todoItems"
-                :key="todoItem" />
+                :key="todoItem.id"
+                :todoItem="todoItem" />
   </div>
 </template>
 
@@ -12,7 +13,16 @@ export default {
   name: "Home",
   data() {
       return {
-          todoItems: [1, 2, 3]
+          todoItems: [
+              {
+                  id: 0,
+                  title: 'write code'
+              },
+              {
+                  id: 1,
+                  title: 'clean my kitchen...'
+              }
+          ]
       }
   },
   components: {
