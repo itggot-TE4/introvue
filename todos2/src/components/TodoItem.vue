@@ -2,7 +2,7 @@
   <li>
     <input type="checkbox" />
     <span>{{ todoItem.title }}</span>
-    <button>X</button>
+    <button @click="$emit('del-todo', todoItem.id)">X</button>
     {{ todoItem.title }}
   </li>
 </template>

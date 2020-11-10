@@ -6,6 +6,7 @@
       v-show="!todoItem.isFiltered"
       :key="todoItem.id"
       :todoItem="todoItem"
+      @del-todo="onDelTodo"
     />
     <TodoForm @add-todo="onAddTodo" />
   </div>
@@ -48,6 +49,9 @@ export default {
         ...m,
         isFiltered: !m.title.includes(filter)
       }));
+    },
+    onDelTodo(id) {
+        this.todoItems = this.todoItems.filter(f => f.id !== id);
     }
   },
   components: {
