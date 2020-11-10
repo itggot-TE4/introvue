@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-      <TodoItem />
+      <TodoItem v-for="todoItem in todoItems"
+                :key="todoItem" />
   </div>
 </template>
 
@@ -9,6 +10,11 @@ import TodoItem from "./TodoItem.vue";
 
 export default {
   name: "Home",
+  data() {
+      return {
+          todoItems: [1, 2, 3]
+      }
+  },
   components: {
       TodoItem
   }
