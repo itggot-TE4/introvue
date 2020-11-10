@@ -1,7 +1,7 @@
 <template>
    <form> 
       <input type="text" name="title">
-      <button>Create Todo</button>
+      <button @click.prevent="createTodo">Create Todo</button>
    </form>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   data() {
      return {
         title: ""
+     }
+  },
+  methods: {
+     createTodo() {
+        console.log("created!");
      }
   }
 };
