@@ -7,6 +7,7 @@
       :key="todoItem.id"
       :todoItem="todoItem"
       @del-todo="onDelTodo"
+      @toggle-completed="onToggleCompleted"
     />
     <TodoForm @add-todo="onAddTodo" />
   </div>
@@ -25,12 +26,14 @@ export default {
         {
           id: 0,
           title: "write code",
-          isFiltered: false
+          isFiltered: false,
+          isDone: false
         },
         {
           id: 1,
           title: "clean my kitchen...",
-          isFiltered: false
+          isFiltered: false,
+          isDone: false
         }
       ],
       counter: 2
@@ -52,6 +55,10 @@ export default {
     },
     onDelTodo(id) {
         this.todoItems = this.todoItems.filter(f => f.id !== id);
+    },
+    onToggleCompleted(id) {
+        const todoItem = this.todoItems.find(f => f.id == id);
+        todoItem.isDone = !todoItem.isDone;
     }
   },
   components: {
