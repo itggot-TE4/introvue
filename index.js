@@ -5,8 +5,8 @@ const App = {
     data() {
         return {
             text: "Hello, World!",
-            items: [],
-            counter: 0,
+            items: [{index: 0, title: 'test'}],
+            counter: 1,
             title: ""
         };
     },
@@ -39,6 +39,9 @@ app.component('Item', {
         deleteItem(index) {
             console.log("delete item: " + index);
             this.$emit('delete_item', index)
+        },
+        markComplete(index) {
+            console.log(index);
         }
     },
     template: `#item-template`
