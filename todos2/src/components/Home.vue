@@ -14,7 +14,7 @@
       @toggle-completed="onToggleCompleted"
     />
     <TodoForm @add-todo="onAddTodo" />
-    <p>{{todosLeft}}</p>
+    <p>{{ todosLeft }}</p>
   </div>
 </template>
 
@@ -50,11 +50,20 @@ export default {
     todoItemFiltered() {
       return this.todoItems.map(todoItem => ({
         ...todoItem,
-        isFiltered: !todoItem.title.includes(this.filter) || (!this.showTodos && todoItem.isDone)
+        isFiltered:
+          !todoItem.title.includes(this.filter) ||
+          (!this.showTodos && todoItem.isDone)
       }));
     },
     todosLeft() {
-        return this.todoItems.filter(f => !f.isDone).length;
+      return this.todoItems.filter(f => !f.isDone).length;
+    }
+  },
+  watch: {
+    todosLeft: function(newValue, _oldValue) {
+      if (newValue == 0) {
+        alert("hurray!! No todos left!");
+      }
     }
   },
   methods: {
