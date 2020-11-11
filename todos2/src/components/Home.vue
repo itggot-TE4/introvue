@@ -51,11 +51,11 @@ export default {
         ...todoItem,
         isFiltered:
           !todoItem.title.includes(this.filter) ||
-          (!this.showTodos && todoItem.isDone)
+          (!this.showTodos && todoItem.isCompleted)
       }));
     },
     todosLeft() {
-      return this.todoItems.filter(f => !f.isDone).length;
+      return this.todoItems.filter(f => !f.isCompleted).length;
     }
   },
   watch: {
@@ -86,11 +86,16 @@ export default {
       this.filter = filter;
     },
     onDelTodo(id) {
-      this.todoItems = this.todoItems.filter(f => f.id !== id);
+      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
+        method: "delete",
+        headers: {
+          "content-type": "application/json"
+        }
+      }).then(json => this.todoItems = this.todoItems.filter(f => f.id !== id));
     },
     onToggleCompleted(id) {
       const todoItem = this.todoItems.find(f => f.id == id);
-      todoItem.isDone = !todoItem.isDone;
+      todoItem.isCompleted = !todoItem.isCompleted;
     },
     toggleShowTodos() {
       this.showTodos = !this.showTodos;
