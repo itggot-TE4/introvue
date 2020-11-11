@@ -6,7 +6,7 @@
       @filter-todos="onFilterTodos"
     />
     <TodoItem
-      v-for="todoItem in todoItems"
+      v-for="todoItem in todoItemFiltered"
       v-show="!todoItem.isFiltered"
       :key="todoItem.id"
       :todoItem="todoItem"
@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       showTodos: true,
+      filter: "",
       todoItems: [
         {
           id: 0,
@@ -44,6 +45,14 @@ export default {
       counter: 2
     };
   },
+  computed: {
+    todoItemFiltered() {
+      return this.todoItems.map(todoItem => ({
+        ...todoItem,
+        isFiltered: !todoItem.title.includes(this.filter) || (!this.showTodos && todoItem.isDone)
+      }));
+    }
+  },
   methods: {
     onAddTodo(title) {
       console.log(title);
@@ -53,10 +62,7 @@ export default {
       });
     },
     onFilterTodos(filter) {
-      this.todoItems = this.todoItems.map(m => ({
-        ...m,
-        isFiltered: !m.title.includes(filter) || (!this.showTodos && m.isDone)
-      }));
+      this.filter = filter;
     },
     onDelTodo(id) {
       this.todoItems = this.todoItems.filter(f => f.id !== id);
