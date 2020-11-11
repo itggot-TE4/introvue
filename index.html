@@ -6,6 +6,7 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Vue.js intro</title>
    <script src="https://unpkg.com/vue@next"></script>
+   <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
@@ -14,13 +15,13 @@
       <ul>
          <component v-for="index in items" :key="index" :index="index" :is="'item'"></component>
       </ul>
-      <input v-model="title" type="text">
+      <input v-model="title" type="text" state="inProgress">
       <button @click="onClick">add</button>
       <p>{{title}}</p>
    </div>
 </body>
 <template id="hello-world-template"><h1>{{text}}</h1></template>
-<template id="item-template"><li>{{index}} <button @click="deleteItem(index)">X</button></li></template>
+<template id="item-template"><li>{{index}} <button @click="deleteItem(index)">X</button><input v-model="state" type="checkbox" @Click="changeState(index)"></li></template>
 <script>
    const { createApp } = Vue;
 
@@ -37,7 +38,8 @@
       methods: {
          onClick() {
             console.log("clicked!");
-            this.items.push(++this.counter);
+            this.items.push(this.title);
+            this.title.push(this.state);
          }
       },
       components: {
@@ -48,6 +50,11 @@
                deleteItem(index) {
                   console.log("delete item: " + index);
                   this.$parent.items.splice(this.$parent.items.indexOf(index), 1);
+               },
+               changeState(index) {
+                  console.log(index + " is finished")
+                  this.$parent.items.classlist.add(this.$parent.items.indexOf(index), 1);
+                  // this.classlist.toggle(".finished")
                }
             },
             template: `#item-template`
