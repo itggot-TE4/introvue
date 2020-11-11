@@ -14,6 +14,7 @@
       @toggle-completed="onToggleCompleted"
     />
     <TodoForm @add-todo="onAddTodo" />
+    <p>{{todosLeft}}</p>
   </div>
 </template>
 
@@ -51,6 +52,9 @@ export default {
         ...todoItem,
         isFiltered: !todoItem.title.includes(this.filter) || (!this.showTodos && todoItem.isDone)
       }));
+    },
+    todosLeft() {
+        return this.todoItems.filter(f => !f.isDone).length;
     }
   },
   methods: {
