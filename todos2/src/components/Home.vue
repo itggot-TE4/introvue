@@ -43,7 +43,7 @@ export default {
       .then(res => {
         return res.json();
       })
-      .then(json => this.todoItems = json);
+      .then(json => (this.todoItems = json));
   },
   computed: {
     todoItemFiltered() {
@@ -67,11 +67,20 @@ export default {
   },
   methods: {
     onAddTodo(title) {
-      console.log(title);
-      this.todoItems.push({
+      const newTodo = {
         id: this.counter++,
-        title: title
-      });
+        title: title,
+        isComplete: false
+      };
+
+      console.log(title);
+      fetch("http://localhost:9292/api/v1/todos", {
+        method: "post",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify(newTodo)
+      }).then(json => this.todoItems.push(newTodo));
     },
     onFilterTodos(filter) {
       this.filter = filter;
