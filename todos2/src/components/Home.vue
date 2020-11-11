@@ -95,7 +95,18 @@ export default {
     },
     onToggleCompleted(id) {
       const todoItem = this.todoItems.find(f => f.id == id);
-      todoItem.isCompleted = !todoItem.isCompleted;
+      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          isCompleted: todoItem.isCompleted
+        }),
+      }).then(json => {
+        console.log("heck yeaa");
+        todoItem.isCompleted = !todoItem.isCompleted;
+      });
     },
     toggleShowTodos() {
       this.showTodos = !this.showTodos;
