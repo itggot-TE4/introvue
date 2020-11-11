@@ -29,20 +29,7 @@ export default {
     return {
       showTodos: true,
       filter: "",
-      todoItems: [
-        {
-          id: 0,
-          title: "write code",
-          isFiltered: false,
-          isDone: false
-        },
-        {
-          id: 1,
-          title: "clean my kitchen...",
-          isFiltered: false,
-          isDone: false
-        }
-      ],
+      todoItems: [],
       counter: 2
     };
   },
@@ -56,7 +43,7 @@ export default {
       .then(res => {
         return res.json();
       })
-      .then(json => console.log(json));
+      .then(json => this.todoItems = json);
   },
   computed: {
     todoItemFiltered() {
