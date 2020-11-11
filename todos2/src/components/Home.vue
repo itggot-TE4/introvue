@@ -46,6 +46,18 @@ export default {
       counter: 2
     };
   },
+  mounted() {
+    fetch("http://localhost:9292/api/v1/todos", {
+      method: "get",
+      headers: {
+        "content-type": "application/json"
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => console.log(json));
+  },
   computed: {
     todoItemFiltered() {
       return this.todoItems.map(todoItem => ({
