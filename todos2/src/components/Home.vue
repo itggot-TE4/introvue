@@ -91,7 +91,9 @@ export default {
         headers: {
           "content-type": "application/json"
         }
-      }).then(json => this.todoItems = this.todoItems.filter(f => f.id !== id));
+      }).then(
+        json => (this.todoItems = this.todoItems.filter(f => f.id !== id))
+      );
     },
     onToggleCompleted(id) {
       const todoItem = this.todoItems.find(f => f.id == id);
@@ -102,7 +104,7 @@ export default {
         },
         body: JSON.stringify({
           isCompleted: todoItem.isCompleted
-        }),
+        })
       }).then(json => {
         console.log("heck yeaa");
         todoItem.isCompleted = !todoItem.isCompleted;
