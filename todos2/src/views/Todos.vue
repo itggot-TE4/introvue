@@ -1,21 +1,19 @@
 <template>
-  <div class="home">
-    <TodoFilter
-      :showTodos="showTodos"
-      @toggle-show-todos="toggleShowTodos"
-      @filter-todos="onFilterTodos"
-    />
-    <TodoItem
-      v-for="todoItem in todoItemFiltered"
-      v-show="!todoItem.isFiltered"
-      :key="todoItem.id"
-      :todoItem="todoItem"
-      @del-todo="onDelTodo"
-      @toggle-completed="onToggleCompleted"
-    />
-    <TodoForm @add-todo="onAddTodo" />
-    <p>{{ todosLeft }}</p>
-  </div>
+  <TodoFilter
+    :showTodos="showTodos"
+    @toggle-show-todos="toggleShowTodos"
+    @filter-todos="onFilterTodos"
+  />
+  <TodoItem
+    v-for="todoItem in todoItemFiltered"
+    v-show="!todoItem.isFiltered"
+    :key="todoItem.id"
+    :todoItem="todoItem"
+    @del-todo="onDelTodo"
+    @toggle-completed="onToggleCompleted"
+  />
+  <TodoForm @add-todo="onAddTodo" />
+  <p>{{ todosLeft }}</p>
 </template>
 
 <script>
@@ -24,7 +22,7 @@ import TodoForm from "./TodoForm.vue";
 import TodoFilter from "./TodoFilter.vue";
 
 export default {
-  name: "Home",
+  name: "Todos",
   data() {
     return {
       showTodos: true,
