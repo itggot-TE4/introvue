@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import TodoItem from "./TodoItem.vue";
-import TodoForm from "./TodoForm.vue";
-import TodoFilter from "./TodoFilter.vue";
+import TodoItem from "@/components/TodoItem.vue";
+import TodoForm from "@/components/TodoForm.vue";
+import TodoFilter from "@/components/TodoFilter.vue";
 
 export default {
   name: "Todos",
