@@ -6,6 +6,10 @@
 
 <script>
 export default {
-  name: "Home"
+  name: "Home",
+  mounted() {
+    // if logged in
+    this.$router.push('todos');
+  }
 };
 </script>
