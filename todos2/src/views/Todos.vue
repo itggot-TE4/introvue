@@ -20,6 +20,7 @@
 import TodoItem from "@/components/TodoItem.vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoFilter from "@/components/TodoFilter.vue";
+import { v4 as uuid } from 'uuid';
 
 export default {
   name: "Todos",
@@ -27,8 +28,7 @@ export default {
     return {
       showTodos: true,
       filter: "",
-      todoItems: [],
-      counter: 2
+      todoItems: []
     };
   },
   mounted() {
@@ -66,7 +66,7 @@ export default {
   methods: {
     onAddTodo(title) {
       const newTodo = {
-        id: this.counter++,
+        id: uuid(),
         title: title,
         isComplete: false
       };
