@@ -68,17 +68,21 @@ export default {
       const newTodo = {
         id: uuid(),
         title: obj.title,
+        description: obj.description,
         isComplete: false
       };
 
-      console.log(title);
       fetch("http://localhost:9292/api/v1/todos", {
         method: "post",
         headers: {
           "content-type": "application/json"
         },
         body: JSON.stringify(newTodo)
-      }).then(json => this.todoItems.push(newTodo));
+      })
+        .then(json => {
+          return json.json()
+        })
+        .then(resp => this.todoItems.push(resp));
     },
     onFilterTodos(filter) {
       this.filter = filter;
