@@ -64,10 +64,10 @@ export default {
     }
   },
   methods: {
-    onAddTodo(title) {
+    onAddTodo(obj) {
       const newTodo = {
         id: uuid(),
-        title: title,
+        title: obj.title,
         isComplete: false
       };
 
