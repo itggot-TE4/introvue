@@ -20,7 +20,7 @@
       <ul>
          <Item @delete_item="deleteItem" v-show="item.title.includes(search)" v-for="item in items" :key="item.index" :index="item.index" :title="item.title"></Item>
       </ul>
-      <input v-model="title" type="text">
+      <input v-model="title" type="text" state="inProgress">
       <button @click="onClick">add</button>
    </div>
 </body>
