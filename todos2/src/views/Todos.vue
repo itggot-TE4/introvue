@@ -1,36 +1,34 @@
 <template>
-  <div class="home">
-    <TodoFilter
-      :showTodos="showTodos"
-      @toggle-show-todos="toggleShowTodos"
-      @filter-todos="onFilterTodos"
-    />
-    <TodoItem
-      v-for="todoItem in todoItemFiltered"
-      v-show="!todoItem.isFiltered"
-      :key="todoItem.id"
-      :todoItem="todoItem"
-      @del-todo="onDelTodo"
-      @toggle-completed="onToggleCompleted"
-    />
-    <TodoForm @add-todo="onAddTodo" />
-    <p>{{ todosLeft }}</p>
-  </div>
+  <TodoFilter
+    :showTodos="showTodos"
+    @toggle-show-todos="toggleShowTodos"
+    @filter-todos="onFilterTodos"
+  />
+  <TodoItem
+    v-for="todoItem in todoItemFiltered"
+    v-show="!todoItem.isFiltered"
+    :key="todoItem.id"
+    :todoItem="todoItem"
+    @del-todo="onDelTodo"
+    @toggle-completed="onToggleCompleted"
+  />
+  <TodoForm @add-todo="onAddTodo" />
+  <p>{{ todosLeft }}</p>
 </template>
 
 <script>
-import TodoItem from "./TodoItem.vue";
-import TodoForm from "./TodoForm.vue";
-import TodoFilter from "./TodoFilter.vue";
+import TodoItem from "@/components/TodoItem.vue";
+import TodoForm from "@/components/TodoForm.vue";
+import TodoFilter from "@/components/TodoFilter.vue";
+import { v4 as uuid } from 'uuid';
 
 export default {
-  name: "Home",
+  name: "Todos",
   data() {
     return {
       showTodos: true,
       filter: "",
-      todoItems: [],
-      counter: 2
+      todoItems: []
     };
   },
   mounted() {
@@ -51,11 +49,11 @@ export default {
         ...todoItem,
         isFiltered:
           !todoItem.title.includes(this.filter) ||
-          (!this.showTodos && todoItem.isDone)
+          (!this.showTodos && todoItem.isCompleted)
       }));
     },
     todosLeft() {
-      return this.todoItems.filter(f => !f.isDone).length;
+      return this.todoItems.filter(f => !f.isCompleted).length;
     }
   },
   watch: {
@@ -68,7 +66,7 @@ export default {
   methods: {
     onAddTodo(title) {
       const newTodo = {
-        id: this.counter++,
+        id: uuid(),
         title: title,
         isComplete: false
       };
@@ -86,11 +84,29 @@ export default {
       this.filter = filter;
     },
     onDelTodo(id) {
-      this.todoItems = this.todoItems.filter(f => f.id !== id);
+      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
+        method: "delete",
+        headers: {
+          "content-type": "application/json"
+        }
+      }).then(
+        json => (this.todoItems = this.todoItems.filter(f => f.id !== id))
+      );
     },
     onToggleCompleted(id) {
       const todoItem = this.todoItems.find(f => f.id == id);
-      todoItem.isDone = !todoItem.isDone;
+      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          isCompleted: todoItem.isCompleted
+        })
+      }).then(json => {
+        console.log("heck yeaa");
+        todoItem.isCompleted = !todoItem.isCompleted;
+      });
     },
     toggleShowTodos() {
       this.showTodos = !this.showTodos;
