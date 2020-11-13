@@ -5,7 +5,7 @@
       @change="$emit('toggle-completed', todoItem.id)"
       type="checkbox"
     />
-    <span :class="{ 'is-complete': todoItem.isCompleted }">{{
+    <span @click="showTodo" :class="{ 'is-complete': todoItem.isCompleted }">{{
       todoItem.title
     }}</span>
     <button @click="$emit('del-todo', todoItem.id)">X</button>
@@ -16,7 +16,12 @@
 <script>
 export default {
   name: "TodoItem",
-  props: ["todoItem"]
+  props: ["todoItem"],
+  methods: {
+    showTodo() {
+      this.$router.push({name: 'Todo', params: {id: this.todoItem.id}});
+    }
+  }
 };
 </script>
 

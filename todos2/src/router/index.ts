@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "@/views/Home.vue";
+import Todo from "@/views/Todo.vue";
 import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
 
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/todos",
     name: "Todos",
     component: Todos
+  },
+  {
+    path: "/todos/:id",
+    name: "Todo",
+    component: Todo
   },
   {
     path: "/login",
