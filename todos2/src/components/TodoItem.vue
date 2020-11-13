@@ -9,7 +9,7 @@
       todoItem.title
     }}</span>
     <button @click="$emit('del-todo', todoItem.id)">X</button>
-    {{ todoItem.title }}
+    {{ todoItem.description }}
   </li>
 </template>
 
