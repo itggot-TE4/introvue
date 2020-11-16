@@ -12,7 +12,7 @@
     @del-todo="onDelTodo"
     @toggle-completed="onToggleCompleted"
   />
-  <TodoForm @add-todo="onAddTodo" />
+  <TodoForm />
   <p>{{ todosLeft }}</p>
 </template>
 
@@ -20,7 +20,6 @@
 import TodoItem from "@/components/TodoItem.vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoFilter from "@/components/TodoFilter.vue";
-import { v4 as uuid } from "uuid";
 import { mapState } from 'vuex'
 
 export default {
@@ -71,22 +70,6 @@ export default {
     }
   },
   methods: {
-    onAddTodo(title) {
-      const newTodo = {
-        id: uuid(),
-        title: title,
-        isComplete: false
-      };
-
-      console.log(title);
-      fetch("http://localhost:9292/api/v1/todos", {
-        method: "post",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(newTodo)
-      }).then(json => this.$store.commit('addTodo', newTodo));
-    },
     onFilterTodos(filter) {
       this.filter = filter;
     },
