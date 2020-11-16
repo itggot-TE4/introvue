@@ -1,8 +1,10 @@
 <template>
-  <input @keyup="filterTodos" v-model="filter" type="text" />
   <div>
-    <span>Show all todos</span>
-    <input :checked="showTodos" @change="toggleShowTodos" type="checkbox" />
+    <input @keyup="filterTodos" v-model="filter" type="text" />
+    <div>
+      <span>Show all todos</span>
+      <input :checked="showTodos" @change="toggleShowTodos" type="checkbox" />
+    </div>
   </div>
 </template>
 

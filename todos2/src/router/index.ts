@@ -3,7 +3,7 @@ import Home from "@/views/Home.vue";
 import Todo from "@/views/Todo.vue";
 import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
-import store, {Todo as ITodo} from "@/store";
+import store, { Todo as ITodo } from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -54,12 +54,12 @@ router.beforeEach((to, from, next) => {
         return res.json();
       })
       .then(todos => {
-        todos.forEach((todo : ITodo) => {
-          store.commit('addTodo', todo);
+        todos.forEach((todo: ITodo) => {
+          store.commit("addTodo", todo);
         });
       })
       .finally(() => next());
   } else next();
-})
+});
 
 export default router;

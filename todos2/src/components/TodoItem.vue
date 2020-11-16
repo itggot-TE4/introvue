@@ -27,7 +27,7 @@ export default {
         headers: {
           "content-type": "application/json"
         }
-      }).then(json => this.$store.commit('delTodo', this.todoItem.id));
+      }).then(json => this.$store.commit("delTodo", this.todoItem.id));
     },
     toggleTodo() {
       fetch(`http://localhost:9292/api/v1/todos/${this.todoItem.id}`, {
@@ -38,7 +38,7 @@ export default {
         body: JSON.stringify({
           isCompleted: this.todoItem.isCompleted
         })
-      }).then(json => this.$store.commit('toggleCompleted', this.todoItem.id));
+      }).then(json => this.$store.commit("toggleCompleted", this.todoItem.id));
     }
   }
 };

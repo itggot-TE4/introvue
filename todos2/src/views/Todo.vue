@@ -18,7 +18,7 @@ export default {
   watch: {
     todoItem(newValue, _oldValue) {
       if (newValue == undefined) {
-        this.$router.replace('../todos')
+        this.$router.replace("../todos");
       }
     }
   },

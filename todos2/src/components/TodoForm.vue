@@ -10,26 +10,26 @@ export default {
   name: "TodoForm",
   data() {
     return {
-      title: "",
+      title: ""
     };
   },
   methods: {
     createTodo() {
       const newTodo = {
         title: this.title,
-        isComplete: false,
+        isComplete: false
       };
 
       fetch("http://localhost:9292/api/v1/todos", {
         method: "post",
         headers: {
-          "content-type": "application/json",
+          "content-type": "application/json"
         },
-        body: JSON.stringify(newTodo),
+        body: JSON.stringify(newTodo)
       })
-        .then((res) => res.json())
-        .then((todo) => this.$store.commit("addTodo", todo));
-    },
-  },
+        .then(res => res.json())
+        .then(todo => this.$store.commit("addTodo", todo));
+    }
+  }
 };
 </script>

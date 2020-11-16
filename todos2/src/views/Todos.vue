@@ -1,24 +1,26 @@
 <template>
-  <TodoFilter
-    :showTodos="showTodos"
-    @toggle-show-todos="toggleShowTodos"
-    @filter-todos="onFilterTodos"
-  />
-  <TodoItem
-    v-for="todoItem in todoItemFiltered"
-    v-show="!todoItem.isFiltered"
-    :key="todoItem.id"
-    :todoItem="todoItem"
-  />
-  <TodoForm />
-  <p>{{ todosLeft }}</p>
+  <div>
+    <TodoFilter
+      :showTodos="showTodos"
+      @toggle-show-todos="toggleShowTodos"
+      @filter-todos="onFilterTodos"
+    />
+    <TodoItem
+      v-for="todoItem in todoItemFiltered"
+      v-show="!todoItem.isFiltered"
+      :key="todoItem.id"
+      :todoItem="todoItem"
+    />
+    <TodoForm />
+    <p>{{ todosLeft }}</p>
+  </div>
 </template>
 
 <script>
 import TodoItem from "@/components/TodoItem.vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoFilter from "@/components/TodoFilter.vue";
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 
 export default {
   name: "Todos",
@@ -40,9 +42,7 @@ export default {
     todosLeft() {
       return this.todos.filter(f => !f.isCompleted).length;
     },
-    ...mapState([
-      'todos'
-    ])
+    ...mapState(["todos"])
   },
   watch: {
     todosLeft: function(newValue, _oldValue) {
