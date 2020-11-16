@@ -7,13 +7,15 @@
 
 <script>
 import TodoItem from "@/components/TodoItem.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "Todo",
   computed: {
     todoItem() {
-      return this.$store.getters.getTodoById(+this.$route.params.id);
-    }
+      return this.getTodoById(+this.$route.params.id);
+    },
+    ...mapGetters(['getTodoById'])
   },
   watch: {
     todoItem(newValue, _oldValue) {
