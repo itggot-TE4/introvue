@@ -85,7 +85,7 @@ export default {
           "content-type": "application/json"
         },
         body: JSON.stringify(newTodo)
-      }).then(json => this.todos.push(newTodo));
+      }).then(json => this.$store.commit('addTodo', newTodo));
     },
     onFilterTodos(filter) {
       this.filter = filter;
