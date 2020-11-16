@@ -22,12 +22,7 @@ export default {
       this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
     },
     delTodo() {
-      fetch(`http://localhost:9292/api/v1/todos/${this.todoItem.id}`, {
-        method: "delete",
-        headers: {
-          "content-type": "application/json"
-        }
-      }).then(json => this.$store.commit("delTodo", this.todoItem.id));
+      this.$store.dispatch('delTodo', this.todoItem.id);
     },
     toggleTodo() {
       fetch(`http://localhost:9292/api/v1/todos/${this.todoItem.id}`, {

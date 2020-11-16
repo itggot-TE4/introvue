@@ -45,6 +45,14 @@ export default createStore({
       todos.forEach((todo: Todo) => {
         commit("addTodo", todo);
       });
+    },
+    async delTodo({ commit }, id) {
+      await fetch(`http://localhost:9292/api/v1/todos/${id}`, {
+        ...reqHeader,
+        method: "delete"
+      })
+      
+      commit("delTodo", id);
     }
   },
   getters: {
