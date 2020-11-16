@@ -28,22 +28,6 @@ export default {
       filter: ""
     };
   },
-  mounted() {
-    fetch("http://localhost:9292/api/v1/todos", {
-      method: "get",
-      headers: {
-        "content-type": "application/json"
-      }
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(todos => {
-        todos.forEach(todo => {
-          this.$store.commit('addTodo', todo);
-        });
-      });
-  },
   computed: {
     todoItemFiltered() {
       return this.todos.map(todoItem => ({
