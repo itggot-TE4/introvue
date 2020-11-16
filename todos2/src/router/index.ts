@@ -43,21 +43,23 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  fetch("http://localhost:9292/api/v1/todos", {
-    method: "get",
-    headers: {
-      "content-type": "application/json"
-    }
-  })
-    .then(res => {
-      return res.json();
+  if (store.state.todos.length == 0) {
+    fetch("http://localhost:9292/api/v1/todos", {
+      method: "get",
+      headers: {
+        "content-type": "application/json"
+      }
     })
-    .then(todos => {
-      todos.forEach((todo : ITodo) => {
-        store.commit('addTodo', todo);
-      });
-    })
-    .finally(() => next());
+      .then(res => {
+        return res.json();
+      })
+      .then(todos => {
+        todos.forEach((todo : ITodo) => {
+          store.commit('addTodo', todo);
+        });
+      })
+      .finally(() => next());
+  } else next();
 })
 
 export default router;
