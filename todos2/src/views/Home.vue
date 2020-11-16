@@ -9,7 +9,7 @@ export default {
   name: "Home",
   mounted() {
     // if logged in
-    this.$router.push('todos');
+    this.$router.push("todos");
   }
 };
 </script>

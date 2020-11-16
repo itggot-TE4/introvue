@@ -19,7 +19,7 @@ export default {
   props: ["todoItem"],
   methods: {
     showTodo() {
-      this.$router.push({name: 'Todo', params: {id: this.todoItem.id}});
+      this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
     }
   }
 };

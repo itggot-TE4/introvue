@@ -20,7 +20,7 @@
 import TodoItem from "@/components/TodoItem.vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoFilter from "@/components/TodoFilter.vue";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 export default {
   name: "Todos",
