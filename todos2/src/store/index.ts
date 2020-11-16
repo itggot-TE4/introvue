@@ -7,6 +7,13 @@ export interface Todo {
   isCompleted: boolean;
 }
 
+const reqHeader = {
+  method: "get",
+  headers: {
+    "content-type": "application/json"
+  }
+}
+
 export default createStore({
   strict: true,
   state: {
@@ -30,21 +37,14 @@ export default createStore({
     }
   },
   actions: {
-    fetchTodos({ commit }) {
-      fetch("http://localhost:9292/api/v1/todos", {
-      method: "get",
-      headers: {
-        "content-type": "application/json"
-      }
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(todos => {
-        todos.forEach((todo: Todo) => {
-          commit("addTodo", todo);
-        });
-      })
+    async fetchTodos({ commit }) {
+      const res = await fetch("http://localhost:9292/api/v1/todos", {
+        ...reqHeader
+      });
+      const todos = await res.json();
+      todos.forEach((todo: Todo) => {
+        commit("addTodo", todo);
+      });
     }
   },
   getters: {
