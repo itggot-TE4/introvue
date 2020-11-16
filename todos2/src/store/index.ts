@@ -53,6 +53,20 @@ export default createStore({
       })
       
       commit("delTodo", id);
+    },
+    async toggleCompleted({ commit, getters }, id) {
+      const todoItem = getters.getTodoById(id);
+      await fetch(`http://localhost:9292/api/v1/todos/${todoItem.id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          isCompleted: todoItem.isCompleted
+        })
+      })
+      
+      commit("toggleCompleted", id);
     }
   },
   getters: {
