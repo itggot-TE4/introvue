@@ -10,7 +10,7 @@ interface Todo {
 export default createStore({
   strict: true,
   state: {
-    todos: [] as Todo[]
+    todos: [{id: 24, title: 'lel'}] as Todo[]
   },
   mutations: {
     addTodo(state, newTodo) {
@@ -30,5 +30,22 @@ export default createStore({
     }
   },
   actions: {},
+  getters: {
+    getTodos: (state) => {
+      return state.todos
+    },
+    getTodoById: (state, getters) => (id : number) => {
+      const todo = getters.getTodos.find((todo : Todo) => {
+        console.log(`testing ${todo.id} with ${id}`);
+        console.log(todo.id === id);
+        return todo.id === id;
+      })
+      console.log(state.todos)
+      console.log(id)
+      console.log("__")
+      console.log(todo)
+      return todo
+    }
+  },
   modules: {}
 });
