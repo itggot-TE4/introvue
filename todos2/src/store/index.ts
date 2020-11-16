@@ -46,6 +46,16 @@ export default createStore({
         commit("addTodo", todo);
       });
     },
+    async createTodo({ commit }, newTodo) {
+      const res = await fetch("http://localhost:9292/api/v1/todos", {
+        ...reqHeader,
+        method: "post",
+        body: JSON.stringify(newTodo)
+      })
+      const todo = await res.json();
+
+      commit("addTodo", todo);
+    },
     async delTodo({ commit }, id) {
       await fetch(`http://localhost:9292/api/v1/todos/${id}`, {
         ...reqHeader,
@@ -57,10 +67,8 @@ export default createStore({
     async toggleCompleted({ commit, getters }, id) {
       const todoItem = getters.getTodoById(id);
       await fetch(`http://localhost:9292/api/v1/todos/${todoItem.id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json"
-        },
+        ...reqHeader,
+        method: "PATCH",        
         body: JSON.stringify({
           isCompleted: todoItem.isCompleted
         })

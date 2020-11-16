@@ -20,15 +20,7 @@ export default {
         isComplete: false
       };
 
-      fetch("http://localhost:9292/api/v1/todos", {
-        method: "post",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify(newTodo)
-      })
-        .then(res => res.json())
-        .then(todo => this.$store.commit("addTodo", todo));
+      this.$store.dispatch('createTodo', newTodo)
     }
   }
 };
