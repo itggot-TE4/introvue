@@ -38,6 +38,8 @@ export default createStore({
       const todo = getters.getTodos.find((todo : Todo) => {
         console.log(`testing ${todo.id} with ${id}`);
         console.log(todo.id === id);
+        console.log(typeof(todo.id));
+        console.log(typeof(id));
         return todo.id === id;
       })
       console.log(state.todos)
