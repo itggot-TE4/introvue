@@ -21,6 +21,7 @@ import TodoItem from "@/components/TodoItem.vue";
 import TodoForm from "@/components/TodoForm.vue";
 import TodoFilter from "@/components/TodoFilter.vue";
 import { v4 as uuid } from "uuid";
+import { mapState } from 'vuex'
 
 export default {
   name: "Todos",
@@ -43,11 +44,6 @@ export default {
       .then(json => (this.todos = json));
   },
   computed: {
-    todos: {
-      get() {
-        return this.$store.state.todos;
-      }
-    },
     todoItemFiltered() {
       return this.todos.map(todoItem => ({
         ...todoItem,
@@ -58,7 +54,10 @@ export default {
     },
     todosLeft() {
       return this.todos.filter(f => !f.isCompleted).length;
-    }
+    },
+    ...mapState([
+      'todos'
+    ])
   },
   watch: {
     todosLeft: function(newValue, _oldValue) {
