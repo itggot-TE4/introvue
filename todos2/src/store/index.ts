@@ -29,7 +29,24 @@ export default createStore({
       todo.isCompleted = !todo.isCompleted;
     }
   },
-  actions: {},
+  actions: {
+    fetchTodos({ commit }) {
+      fetch("http://localhost:9292/api/v1/todos", {
+      method: "get",
+      headers: {
+        "content-type": "application/json"
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(todos => {
+        todos.forEach((todo: Todo) => {
+          commit("addTodo", todo);
+        });
+      })
+    }
+  },
   getters: {
     getTodoById: state => (id: number) => {
       return state.todos.find(todo => todo.id === id);
