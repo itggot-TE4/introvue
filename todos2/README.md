@@ -2,6 +2,7 @@
 
 ## Packages
 vue add router
+vue add vuex
 
 ## Run todos backend
 ```
