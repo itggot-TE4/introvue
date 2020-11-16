@@ -96,9 +96,7 @@ export default {
         headers: {
           "content-type": "application/json"
         }
-      }).then(
-        json => (this.todos = this.todos.filter(f => f.id !== id))
-      );
+      }).then(json => this.$store.commit('delTodo', id));
     },
     onToggleCompleted(id) {
       const todoItem = this.todos.find(f => f.id == id);
