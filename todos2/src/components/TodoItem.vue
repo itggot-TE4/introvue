@@ -8,7 +8,7 @@
     <span @click="showTodo" :class="{ 'is-complete': todoItem.isCompleted }">{{
       todoItem.title
     }}</span>
-    <button @click="$emit('del-todo', todoItem.id)">X</button>
+    <button @click="delTodo">X</button>
     {{ todoItem.title }}
   </li>
 </template>
@@ -20,6 +20,14 @@ export default {
   methods: {
     showTodo() {
       this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
+    },
+    delTodo() {
+      fetch(`http://localhost:9292/api/v1/todos/${this.todoItem.id}`, {
+        method: "delete",
+        headers: {
+          "content-type": "application/json"
+        }
+      }).then(json => this.$store.commit('delTodo', this.todoItem.id));
     }
   }
 };

@@ -9,7 +9,6 @@
     v-show="!todoItem.isFiltered"
     :key="todoItem.id"
     :todoItem="todoItem"
-    @del-todo="onDelTodo"
     @toggle-completed="onToggleCompleted"
   />
   <TodoForm />
@@ -72,14 +71,6 @@ export default {
   methods: {
     onFilterTodos(filter) {
       this.filter = filter;
-    },
-    onDelTodo(id) {
-      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
-        method: "delete",
-        headers: {
-          "content-type": "application/json"
-        }
-      }).then(json => this.$store.commit('delTodo', id));
     },
     onToggleCompleted(id) {
       const todoItem = this.todos.find(f => f.id == id);
