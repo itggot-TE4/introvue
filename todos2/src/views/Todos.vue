@@ -41,7 +41,11 @@ export default {
       .then(res => {
         return res.json();
       })
-      .then(json => (this.todos = json));
+      .then(todos => {
+        todos.forEach(todo => {
+          this.$store.commit('addTodo', todo);
+        });
+      });
   },
   computed: {
     todoItemFiltered() {
