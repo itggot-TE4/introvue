@@ -27,8 +27,7 @@ export default {
   data() {
     return {
       showTodos: true,
-      filter: "",
-      todoItems: []
+      filter: ""
     };
   },
   mounted() {
@@ -41,11 +40,11 @@ export default {
       .then(res => {
         return res.json();
       })
-      .then(json => (this.todoItems = json));
+      .then(json => (this.$store.state.todos = json));
   },
   computed: {
     todoItemFiltered() {
-      return this.todoItems.map(todoItem => ({
+      return this.$store.state.todos.map(todoItem => ({
         ...todoItem,
         isFiltered:
           !todoItem.title.includes(this.filter) ||
@@ -53,7 +52,7 @@ export default {
       }));
     },
     todosLeft() {
-      return this.todoItems.filter(f => !f.isCompleted).length;
+      return this.$store.state.todos.filter(f => !f.isCompleted).length;
     }
   },
   watch: {
@@ -78,7 +77,7 @@ export default {
           "content-type": "application/json"
         },
         body: JSON.stringify(newTodo)
-      }).then(json => this.todoItems.push(newTodo));
+      }).then(json => this.$store.state.todos.push(newTodo));
     },
     onFilterTodos(filter) {
       this.filter = filter;
@@ -90,11 +89,11 @@ export default {
           "content-type": "application/json"
         }
       }).then(
-        json => (this.todoItems = this.todoItems.filter(f => f.id !== id))
+        json => (this.$store.state.todos = this.$store.state.todos.filter(f => f.id !== id))
       );
     },
     onToggleCompleted(id) {
-      const todoItem = this.todoItems.find(f => f.id == id);
+      const todoItem = this.$store.state.todos.find(f => f.id == id);
       fetch(`http://localhost:9292/api/v1/todos/${id}`, {
         method: "PATCH",
         headers: {
