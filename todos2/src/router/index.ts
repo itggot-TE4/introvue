@@ -43,8 +43,8 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (store.state.todos.length == 0) {
-    store.dispatch('fetchTodos');
+  if (store.getters['todos/numTodos'] == 0) {
+    store.dispatch('todos/fetchTodos');
   }
   
   next();
