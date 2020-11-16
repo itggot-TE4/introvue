@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
-    <TodoItem :todo-item="todoItem" />
+    <TodoItem v-if="todoItem" :todo-item="todoItem" />
   </div>
 </template>
 
@@ -18,7 +18,6 @@ export default {
   watch: {
     todoItem(newValue, _oldValue) {
       if (newValue == undefined) {
-        alert('OH NOES');
         this.$router.replace('../todos')
       }
     }
