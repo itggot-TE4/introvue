@@ -72,21 +72,6 @@ export default {
     onFilterTodos(filter) {
       this.filter = filter;
     },
-    onToggleCompleted(id) {
-      const todoItem = this.todos.find(f => f.id == id);
-      fetch(`http://localhost:9292/api/v1/todos/${id}`, {
-        method: "PATCH",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
-          isCompleted: todoItem.isCompleted
-        })
-      }).then(json => {
-        console.log("heck yeaa");
-        todoItem.isCompleted = !todoItem.isCompleted;
-      });
-    },
     toggleShowTodos() {
       this.showTodos = !this.showTodos;
     }

@@ -2,7 +2,7 @@
   <li>
     <input
       :checked="todoItem.isCompleted"
-      @change="$emit('toggle-completed', todoItem.id)"
+      @change="toggleTodo"
       type="checkbox"
     />
     <span @click="showTodo" :class="{ 'is-complete': todoItem.isCompleted }">{{
@@ -28,6 +28,20 @@ export default {
           "content-type": "application/json"
         }
       }).then(json => this.$store.commit('delTodo', this.todoItem.id));
+    },
+    toggleTodo() {
+      fetch(`http://localhost:9292/api/v1/todos/${this.todoItem.id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          isCompleted: this.todoItem.isCompleted
+        })
+      }).then(json => {
+        console.log("heck yeaa");
+        this.todoItem.isCompleted = !this.todoItem.isCompleted;
+      });
     }
   }
 };
