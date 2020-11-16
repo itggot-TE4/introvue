@@ -38,10 +38,7 @@ export default {
         body: JSON.stringify({
           isCompleted: this.todoItem.isCompleted
         })
-      }).then(json => {
-        console.log("heck yeaa");
-        this.todoItem.isCompleted = !this.todoItem.isCompleted;
-      });
+      }).then(json => this.$store.commit('toggleCompleted', this.todoItem.id));
     }
   }
 };

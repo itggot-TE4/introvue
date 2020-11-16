@@ -18,6 +18,15 @@ export default createStore({
     },
     delTodo(state, id) {
       state.todos = state.todos.filter(f => f.id !== id)
+    },
+    toggleCompleted(state, id) {
+      const todo = state.todos.find(f => f.id == id);
+
+      if (todo === undefined) {
+        throw new TypeError(`no Todo with id: ${id}`);
+      }
+
+      todo.isCompleted = !todo.isCompleted
     }
   },
   actions: {},

@@ -9,7 +9,6 @@
     v-show="!todoItem.isFiltered"
     :key="todoItem.id"
     :todoItem="todoItem"
-    @toggle-completed="onToggleCompleted"
   />
   <TodoForm />
   <p>{{ todosLeft }}</p>
