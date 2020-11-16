@@ -15,6 +15,14 @@ export default {
       return this.$store.getters.getTodoById(+this.$route.params.id);
     }
   },
+  watch: {
+    todoItem(newValue, _oldValue) {
+      if (newValue == undefined) {
+        alert('OH NOES');
+        this.$router.replace('../todos')
+      }
+    }
+  },
   components: { TodoItem }
 };
 </script>
