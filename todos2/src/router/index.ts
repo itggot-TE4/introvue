@@ -47,21 +47,15 @@ router.beforeEach((to, from, next) => {
   if (store.getters['todos/numTodos'] == 0) {
     const token = localStorage.getItem('access_token');
     if (token) {
-      store.commit("todos/setToken", token);
       store.dispatch('todos/fetchTodos');
     } else {
       axios.post("http://localhost:9292/api/v1/users/login",
         {
           username: "Linus",
           password: "123"
-        },
-        {
-          headers: {
-            "content-type": "application/json"
-          }
         })
         .then((resp: any) => {
-          store.commit("todos/setToken", resp.data.token);
+          localStorage.setItem('access_token', resp.data.token);
           store.dispatch('todos/fetchTodos');
         })
     }
