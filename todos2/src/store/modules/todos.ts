@@ -1,4 +1,5 @@
 import { Module } from 'vuex';
+import axios from "axios";
 
 export interface Todo {
   id: number;
@@ -10,14 +11,6 @@ export interface Todo {
 export interface TodosState {
   todos: Todo[],
   token: string
-}
-
-const reqHeader = {
-  method: "get",
-  headers: {
-    "content-type": "application/json",
-    "Authorization": ""
-  },
 }
 
 export default {
@@ -41,50 +34,35 @@ export default {
       }
 
       todo.isCompleted = !todo.isCompleted;
-    },
-    setToken(state, token) {
-      state.token = token;
-      localStorage.setItem('access_token', token);
-      reqHeader.headers["Authorization"] = `Bearer ${token}`
     }
   },
   actions: {
     async fetchTodos({ commit }) {
-      const res = await fetch("http://localhost:9292/api/v1/todos", {
-        ...reqHeader
-      });
-      const todos = await res.json();
-      todos.forEach((todo: Todo) => {
-        commit("addTodo", todo);
-      });
+      const resp = await axios.get("http://localhost:9292/api/v1/todos");
+
+      if (resp.data) {
+        resp.data.forEach((todo: Todo) => {
+          commit("addTodo", todo);
+        });
+      }
     },
     async createTodo({ commit }, newTodo) {
-      const res = await fetch("http://localhost:9292/api/v1/todos", {
-        ...reqHeader,
-        method: "post",
-        body: JSON.stringify(newTodo)
-      })
-      const todo = await res.json();
+      const todo = await axios.post("http://localhost:9292/api/v1/todos", newTodo);
 
-      commit("addTodo", todo);
+      if (todo.data) {
+        commit("addTodo", todo);
+      }
     },
     async delTodo({ commit }, id) {
-      await fetch(`http://localhost:9292/api/v1/todos/${id}`, {
-        ...reqHeader,
-        method: "delete"
-      })
+      await axios.delete(`http://localhost:9292/api/v1/todos/${id}`);
 
       commit("delTodo", id);
     },
     async toggleCompleted({ commit, getters }, id) {
       const todoItem = getters.getTodoById(id);
-      await fetch(`http://localhost:9292/api/v1/todos/${todoItem.id}`, {
-        ...reqHeader,
-        method: "PATCH",
-        body: JSON.stringify({
-          isCompleted: todoItem.isCompleted
-        })
-      })
+      await axios.patch(`http://localhost:9292/api/v1/todos/${todoItem.id}`, {
+        isCompleted: todoItem.isCompleted
+      });
 
       commit("toggleCompleted", id);
     }
