@@ -3,6 +3,7 @@
 ## Packages
 vue add router
 vue add vuex
+npm install axios
 
 ## Run todos backend
 ```

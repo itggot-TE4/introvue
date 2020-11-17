@@ -4,6 +4,7 @@ import Todo from "@/views/Todo.vue";
 import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
+import axios from "axios";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -49,21 +50,18 @@ router.beforeEach((to, from, next) => {
       store.commit("todos/setToken", token);
       store.dispatch('todos/fetchTodos');
     } else {
-      fetch("http://localhost:9292/api/v1/users/login", {
-        method: "post",
-        headers: {
-          "content-type": "application/json"
-        },
-        body: JSON.stringify({
+      axios.post("http://localhost:9292/api/v1/users/login",
+        {
           username: "Linus",
           password: "123"
+        },
+        {
+          headers: {
+            "content-type": "application/json"
+          }
         })
-      })
-        .then(res => {
-          return res.json();
-        })
-        .then(tokenObj => {
-          store.commit("todos/setToken", tokenObj.token);
+        .then((resp: any) => {
+          store.commit("todos/setToken", resp.data.token);
           store.dispatch('todos/fetchTodos');
         })
     }
