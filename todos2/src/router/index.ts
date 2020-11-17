@@ -44,23 +44,29 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (store.getters['todos/numTodos'] == 0) {
-    fetch("http://localhost:9292/api/v1/users/login", {
-      method: "post",
-      headers: {
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
-        username: "Linus",
-        password: "123"
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      store.commit("todos/setToken", token);
+      store.dispatch('todos/fetchTodos');
+    } else {
+      fetch("http://localhost:9292/api/v1/users/login", {
+        method: "post",
+        headers: {
+          "content-type": "application/json"
+        },
+        body: JSON.stringify({
+          username: "Linus",
+          password: "123"
+        })
       })
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(tokenObj => {
-        store.commit("todos/setToken", tokenObj.token);
-        store.dispatch('todos/fetchTodos');
-      })
+        .then(res => {
+          return res.json();
+        })
+        .then(tokenObj => {
+          store.commit("todos/setToken", tokenObj.token);
+          store.dispatch('todos/fetchTodos');
+        })
+    }
   }
 
   next();
