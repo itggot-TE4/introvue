@@ -8,21 +8,23 @@ export interface Todo {
 }
 
 export interface TodosState {
-  todos: Todo[]
+  todos: Todo[],
+  token: string
 }
 
 const reqHeader = {
   method: "get",
   headers: {
     "content-type": "application/json",
-    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.fWoPW7BmOFoOaiFYoMbNuNjmLrSoc-74ShvCq5QacvQ"
+    "Authorization": ""
   },
 }
 
 export default {
   namespaced: true,
   state: {
-    todos: []
+    todos: [],
+    token: ""
   },
   mutations: {
     addTodo(state, newTodo) {
@@ -39,6 +41,10 @@ export default {
       }
 
       todo.isCompleted = !todo.isCompleted;
+    },
+    setToken(state, token) {
+      state.token = token;
+      reqHeader.headers["Authorization"] = `Bearer ${token}`
     }
   },
   actions: {
