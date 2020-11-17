@@ -15,7 +15,7 @@ export default {
     todoItem() {
       return this.getTodoById(+this.$route.params.id);
     },
-    ...mapGetters(['getTodoById'])
+    ...mapGetters('todos', ['getTodoById'])
   },
   watch: {
     todoItem(newValue, _oldValue) {

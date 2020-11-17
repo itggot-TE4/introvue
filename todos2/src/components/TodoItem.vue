@@ -22,7 +22,7 @@ export default {
     showTodo() {
       this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
     },
-    ...mapActions(['delTodo', 'toggleCompleted'])
+    ...mapActions('todos', ['delTodo', 'toggleCompleted'])
   }
 };
 </script>

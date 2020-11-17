@@ -42,7 +42,7 @@ export default {
     todosLeft() {
       return this.todos.filter(f => !f.isCompleted).length;
     },
-    ...mapState(["todos"])
+    ...mapState('todos', ["todos"])
   },
   watch: {
     todosLeft: function(newValue, _oldValue) {
