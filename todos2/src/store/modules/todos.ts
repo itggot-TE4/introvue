@@ -44,6 +44,7 @@ export default {
     },
     setToken(state, token) {
       state.token = token;
+      localStorage.setItem('access_token', token);
       reqHeader.headers["Authorization"] = `Bearer ${token}`
     }
   },
