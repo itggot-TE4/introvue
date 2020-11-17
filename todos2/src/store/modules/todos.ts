@@ -14,8 +14,9 @@ export interface TodosState {
 const reqHeader = {
   method: "get",
   headers: {
-    "content-type": "application/json"
-  }
+    "content-type": "application/json",
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.fWoPW7BmOFoOaiFYoMbNuNjmLrSoc-74ShvCq5QacvQ"
+  },
 }
 
 export default {
