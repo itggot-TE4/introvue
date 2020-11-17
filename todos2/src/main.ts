@@ -8,4 +8,19 @@ createApp(App)
   .use(router)
   .mount("#app");
 
-store.commit("todos/setToken", "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.fWoPW7BmOFoOaiFYoMbNuNjmLrSoc-74ShvCq5QacvQ")
+fetch("http://localhost:9292/api/v1/users/login", {
+  method: "post",
+  headers: {
+    "content-type": "application/json"
+  },
+  body: JSON.stringify({
+    username: "Linus",
+    password: "123"
+  })
+})
+  .then(res => {
+    return res.json();
+  })
+  .then(tokenObj => {
+    store.commit("todos/setToken", tokenObj.token)
+  })
