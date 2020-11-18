@@ -1,6 +1,5 @@
 import { Module } from 'vuex';
 import axios from "axios";
-import jwt from "jsonwebtoken";
 
 export interface AuthState {
   token: string
@@ -11,20 +10,12 @@ export default {
   state: {
     token: ""
   },
-  mutations: {
-    login(state, token) {
-      state.token = token;
-      console.log(jwt.decode(token))
-      localStorage.setItem("access_token", token);
-    }
-  },
+  mutations: {},
   actions: {
-    async authorize({ commit }, credentials) {
-      axios
-        .post("http://localhost:9292/api/v1/users/login", credentials)
-        .then((resp) => {
-          commit('login', resp.data.token)
-        });
+    async authorize({ commit, dispatch }, credentials) {
+      const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
+
+      dispatch('user/login', resp.data.token)
     }
   },
   getters: {
