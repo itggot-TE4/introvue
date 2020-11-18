@@ -1,7 +1,8 @@
 import { createStore } from "vuex";
-import todos, { TodosState } from "./modules/todos";
+import todos from "./modules/todos";
+import auth from "./modules/auth";
 
-export default createStore<TodosState>({
+export default createStore<{}>({
   strict: true,
-  modules: { todos }
+  modules: { todos, auth }
 });

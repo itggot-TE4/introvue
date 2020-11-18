@@ -9,15 +9,13 @@ export interface Todo {
 }
 
 export interface TodosState {
-  todos: Todo[],
-  token: string
+  todos: Todo[]
 }
 
 export default {
   namespaced: true,
   state: {
-    todos: [],
-    token: ""
+    todos: []
   },
   mutations: {
     addTodo(state, newTodo) {
