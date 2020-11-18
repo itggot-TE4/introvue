@@ -18,6 +18,7 @@ export default {
   actions: {
     async authorize({ commit, dispatch }, credentials) {
       try {
+        // TODO: set loading true
         const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
 
         console.log("do i get here?")
@@ -25,6 +26,7 @@ export default {
       } catch (err) {
         commit('setFailure', err.message)
       }
+      // TODO: finally set loading false
     }
   },
   getters: {
