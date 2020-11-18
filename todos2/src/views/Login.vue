@@ -19,7 +19,7 @@ export default {
     login() {
       this.$store.dispatch("auth/authorize", {
         username: "Linus",
-        password: "1234"
+        password: "123"
       });
     },
   },

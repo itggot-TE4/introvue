@@ -45,6 +45,9 @@ export default {
   getters: {
     name(state) {
       return state.currentUser.username;
+    },
+    token(state) {
+      return state.token;
     }
   }
 } as Module<UserState, {}>;

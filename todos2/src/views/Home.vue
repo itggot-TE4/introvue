@@ -8,7 +8,7 @@
 export default {
   name: "Home",
   mounted() {
-    const token = localStorage.getItem('access_token');
+    const token = this.$store.getters['user/token'];
     if (token) {
       this.$router.push("todos");
     } else {

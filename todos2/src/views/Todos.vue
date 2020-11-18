@@ -31,7 +31,7 @@ export default {
     };
   },
   mounted() {
-    const token = localStorage.getItem('access_token');
+    const token = this.$store.getters['user/token'];
     if (!token) {
       this.$router.push("login");
     }

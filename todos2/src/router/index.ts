@@ -44,7 +44,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (store.getters['todos/numTodos'] == 0) {
-    const token = localStorage.getItem('access_token');
+    const token = store.getters['user/token'];
     if (token) {
       store.dispatch('todos/fetchTodos');
     }
