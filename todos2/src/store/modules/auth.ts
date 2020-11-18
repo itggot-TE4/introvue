@@ -15,7 +15,7 @@ export default {
     async authorize({ commit, dispatch }, credentials) {
       const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
 
-      dispatch('user/login', resp.data.token)
+      dispatch('user/login', resp.data.token, { root:true })
     }
   },
   getters: {
