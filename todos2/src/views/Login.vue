@@ -2,7 +2,7 @@
   <div class="login">
     <h1>This is a login page</h1>
     <button @click="login">login</button>
-    <p>{{isLoggedIn}}</p>
+    <p>{{user}}</p>
   </div>
 </template>
 
@@ -10,8 +10,8 @@
 export default {
   name: "Login",
   computed: {
-    isLoggedIn() {
-      return this.$store.getters['auth/isLoggedIn']
+    user() {
+      return this.$store.getters['user/name']
     }
   },
   methods: {

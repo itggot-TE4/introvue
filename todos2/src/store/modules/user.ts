@@ -6,20 +6,25 @@ interface DecodedToken {
   id: string
 }
 
+interface User {
+  id: number,
+  username: string
+}
+
 export interface UserState {
   token: string,
-  currentId: number
+  currentUser: User
 }
 
 export default {
   namespaced: true,
   state: {
     token: "",
-    currentId: -1
+    currentUser: {} as User
   },
   mutations: {
-    updateUserId(state, userId) {
-      state.currentId = userId;
+    updateUser(state, user) {
+      state.currentUser = user;
     },
     updateToken(state, token) {
       state.token = token;
@@ -31,13 +36,15 @@ export default {
       const decoded = jwt.decode(token) as DecodedToken;
       if (decoded) {
         console.log("logged in: " + decoded.id);
-        commit('updateUserId', +decoded.id);
+        const user = await axios.get("http://localhost:9292/api/v1/users");
+        console.log(user);
+        commit('updateUser', user.data);
       }
     }
   },
   getters: {
-    userId(state) {
-      return state.currentId;
+    name(state) {
+      return state.currentUser.username;
     }
   }
 } as Module<UserState, {}>;
