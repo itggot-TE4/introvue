@@ -4,6 +4,7 @@
 vue add router
 vue add vuex
 npm install axios
+npm install jsonwebtoken
 
 ## Run todos backend
 ```

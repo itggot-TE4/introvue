@@ -5,6 +5,7 @@ import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -56,6 +57,7 @@ router.beforeEach((to, from, next) => {
         })
         .then((resp: any) => {
           localStorage.setItem('access_token', resp.data.token);
+          console.log(jwt.decode(resp.data.token));
           store.dispatch('todos/fetchTodos');
         })
     }
