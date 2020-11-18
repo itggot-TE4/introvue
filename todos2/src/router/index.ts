@@ -4,8 +4,6 @@ import Todo from "@/views/Todo.vue";
 import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
-import axios from "axios";
-import jwt from "jsonwebtoken";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -49,17 +47,6 @@ router.beforeEach((to, from, next) => {
     const token = localStorage.getItem('access_token');
     if (token) {
       store.dispatch('todos/fetchTodos');
-    } else {
-      axios.post("http://localhost:9292/api/v1/users/login",
-        {
-          username: "Linus",
-          password: "123"
-        })
-        .then((resp: any) => {
-          localStorage.setItem('access_token', resp.data.token);
-          console.log(jwt.decode(resp.data.token));
-          store.dispatch('todos/fetchTodos');
-        })
     }
   }
 
