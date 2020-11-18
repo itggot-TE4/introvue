@@ -30,12 +30,6 @@ export default {
       filter: ""
     };
   },
-  mounted() {
-    const token = this.$store.getters['user/token'];
-    if (!token) {
-      this.$router.push("login");
-    }
-  },
   computed: {
     todoItemFiltered() {
       return this.todos.map(todoItem => ({

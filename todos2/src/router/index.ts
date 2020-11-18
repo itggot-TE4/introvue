@@ -1,16 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "@/views/Home.vue";
 import Todo from "@/views/Todo.vue";
 import Todos from "@/views/Todos.vue";
 import Login from "@/views/Login.vue";
 import store from "@/store";
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
   {
     path: "/todos",
     name: "Todos",
@@ -43,14 +37,18 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (store.getters['todos/numTodos'] == 0) {
-    const token = store.getters['user/token'];
-    if (token) {
-      store.dispatch('todos/fetchTodos');
-    }
+  const token = store.getters['user/token'];
+
+  if (store.getters['todos/numTodos'] == 0 && token) {
+    store.dispatch('todos/fetchTodos');
   }
 
-  next();
+  if (!token && to.fullPath != "/login") {
+    next("/login");
+  } else {
+    next();
+  }
+
 });
 
 export default router;
