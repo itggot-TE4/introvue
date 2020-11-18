@@ -2,25 +2,34 @@ import { Module } from 'vuex';
 import axios from "axios";
 
 export interface AuthState {
-  token: string
+  failure: string
 }
 
 export default {
   namespaced: true,
   state: {
-    token: ""
+    failure: ""
   },
-  mutations: {},
+  mutations: {
+    setFailure(state, err) {
+      state.failure = err;
+    }
+  },
   actions: {
     async authorize({ commit, dispatch }, credentials) {
-      const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
+      try {
+        const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
 
-      dispatch('user/login', resp.data.token, { root:true })
+        console.log("do i get here?")
+        dispatch('user/login', resp.data.token, { root:true })
+      } catch (err) {
+        commit('setFailure', err.message)
+      }
     }
   },
   getters: {
-    isLoggedIn(state) {
-      return state.token.length > 0;
+    failure(state) {
+      return state.failure
     }
   }
 } as Module<AuthState, {}>;

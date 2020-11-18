@@ -2,23 +2,24 @@
   <div class="login">
     <h1>This is a login page</h1>
     <button @click="login">login</button>
-    <p>{{user}}</p>
+    <p>{{name}}</p>
+    <p>{{failure}}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: "Login",
   computed: {
-    user() {
-      return this.$store.getters['user/name']
-    }
+    ...mapGetters('user', ['name']),
+    ...mapGetters('auth', ['failure'])
   },
   methods: {
     login() {
       this.$store.dispatch("auth/authorize", {
         username: "Linus",
-        password: "123"
+        password: "1234"
       });
     },
   },
