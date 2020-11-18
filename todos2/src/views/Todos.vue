@@ -30,6 +30,12 @@ export default {
       filter: ""
     };
   },
+  mounted() {
+    const token = localStorage.getItem('access_token');
+    if (!token) {
+      this.$router.push("login");
+    }
+  },
   computed: {
     todoItemFiltered() {
       return this.todos.map(todoItem => ({
