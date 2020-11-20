@@ -28,9 +28,11 @@ describe("TodoItem.vue", () => {
     }
 
     const wrapper = shallowMount(TodoItem, {
-        mocks: {
-            $router: {
-                push: jest.fn()
+        global: {
+            mocks: {
+                $router: {
+                    push: jest.fn()
+                }
             }
         },
         props: { todoItem }
