@@ -1,4 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
+import { createStore } from "vuex";
 import TodoItem from "@/components/TodoItem.vue";
 
 describe("TodoItem.vue", () => {
@@ -43,6 +44,28 @@ describe("TodoItem.vue", () => {
     wrapper.find('span').trigger("click");
     expect(pushFunction).toHaveBeenCalledWith(expect.objectContaining({ name: "Todo" }));
     expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } });
+  });
+
+  it("vuex", async () => {
+    const todoItem = {
+      id: 1,
+      description: "hello, world!"
+    }
+
+    const store = createStore({});
+    store.dispatch = jest.fn()
+
+    const wrapper = shallowMount(TodoItem, {
+      global: {
+        plugins: [store]
+      },
+      props: { todoItem },
+    });
+
+    wrapper.find('button').trigger("click");
+    await wrapper.vm.$nextTick()
+
+    expect(store.dispatch).toHaveBeenCalledWith('todos/delTodo', todoItem.id);
   });
 
   it("renders correctly", () => {
