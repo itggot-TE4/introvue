@@ -27,17 +27,19 @@ describe("TodoItem.vue", () => {
         title: "hello, world!"
     }
 
+    const pushFunction = jest.fn();
+
     const wrapper = shallowMount(TodoItem, {
         global: {
             mocks: {
                 $router: {
-                    push: jest.fn()
+                    push: pushFunction
                 }
             }
         },
         props: { todoItem }
       });
     wrapper.find('span').trigger("click");
-    expect(wrapper.text()).toMatch(todoItem.title);
+    expect(pushFunction).toHaveBeenCalled();
   });
 });
