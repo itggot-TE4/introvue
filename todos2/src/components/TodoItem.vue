@@ -5,11 +5,10 @@
       @change="toggleCompleted(todoItem.id)"
       type="checkbox"
     />
-    <span @click="showTodo" :class="{ 'is-complete': todoItem.isCompleted }">{{
+    <span data-unit="title" @click="showTodo" :class="{ 'is-complete': todoItem.isCompleted }">{{
       todoItem.title
     }}</span>
-    <button @click="$store.dispatch('todos/delTodo', todoItem.id)">X</button>
-    {{ todoItem.title }}
+    <button data-unit="deleteBtn" @click="delTodo(todoItem.id)">X</button>
   </li>
 </template>
 
@@ -22,7 +21,7 @@ export default {
     showTodo() {
       this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
     },
-    //...mapActions("todos", ["delTodo", "toggleCompleted"])
+    ...mapActions("todos", ["delTodo", "toggleCompleted"])
   }
 };
 </script>

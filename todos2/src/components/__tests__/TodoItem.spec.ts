@@ -1,84 +1,70 @@
-import { shallowMount } from "@vue/test-utils";
-import { createStore } from "vuex";
+import { shallowMount, VueWrapper } from "@vue/test-utils";
+import { createStore, Store } from "vuex";
 import TodoItem from "@/components/TodoItem.vue";
 
+const todoItem = {
+  id: 1,
+  title: "Hello, World!",
+  description: "something else",
+  isCompleted: true
+}
+
+let wrapper: VueWrapper<any>;
+let store: Store<{}>;
+
+const pushFunction = jest.fn();
+
 describe("TodoItem.vue", () => {
-  it("renders props.todoItem.title when passed", () => {
-    const todoItem = {
-      title: "hello, world!"
+
+  beforeAll(() => {
+    const todos = {
+      namespaced: true,
+      actions: {
+        delTodo: jest.fn()
+      }
     }
-    const wrapper = shallowMount(TodoItem, {
-      props: { todoItem }
+
+    store = createStore<{}>({
+      modules: { todos }
     });
-    expect(wrapper.text()).toMatch(todoItem.title);
-  });
 
-  it("does not render props.todoItem.description when passed", () => {
-    const todoItem = {
-      description: "hello, world!"
-    }
-    const wrapper = shallowMount(TodoItem, {
-      props: { todoItem }
-    });
-    expect(wrapper.text()).not.toMatch(todoItem.description);
-  });
+    store.dispatch = jest.fn()
 
-  it("navigates to route /todos/<id> when clicked on", () => {
-    const todoItem = {
-      id: 1,
-      title: "hello, world!"
-    }
-
-    const pushFunction = jest.fn();
-
-    const wrapper = shallowMount(TodoItem, {
+    wrapper = shallowMount(TodoItem, {
+      props: { todoItem },
       global: {
+        plugins: [store],
         mocks: {
           $router: {
             push: pushFunction
           }
         }
       },
-      props: { todoItem }
-    });
-    wrapper.find('span').trigger("click");
+    })
+  });
+
+  it("renders props.todoItem.title when passed", () => {
+    expect(wrapper.text()).toMatch(todoItem.title);
+  });
+
+  it("does not render props.todoItem.description when passed", () => {
+    expect(wrapper.text()).not.toMatch(todoItem.description);
+  });
+
+  it("navigates to route /todos/<id> when clicked on", () => {
+    wrapper.find('[data-unit="title"]').trigger("click");
     expect(pushFunction).toHaveBeenCalledWith(expect.objectContaining({ name: "Todo" }));
     expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } });
   });
 
-  it("vuex", async () => {
-    const todoItem = {
-      id: 1,
-      description: "hello, world!"
-    }
-
-    const store = createStore({});
-    store.dispatch = jest.fn()
-
-    const wrapper = shallowMount(TodoItem, {
-      global: {
-        plugins: [store]
-      },
-      props: { todoItem },
-    });
-
-    wrapper.find('button').trigger("click");
+  it("when delete button is pressed, vuex is called", async () => {
+    wrapper.find('[data-unit="deleteBtn"]').trigger("click");
     await wrapper.vm.$nextTick()
 
     expect(store.dispatch).toHaveBeenCalledWith('todos/delTodo', todoItem.id);
   });
 
   it("renders correctly", () => {
-    const todoItem = {
-      id: 1,
-      title: "hello, world!",
-      description: "foobar",
-      isCompleted: true
-    }
-    const wrapper = shallowMount(TodoItem, {
-      props: { todoItem }
-    });
-
     expect(wrapper.html()).toMatchSnapshot();
-})
+  })
 });

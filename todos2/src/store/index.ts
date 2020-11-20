@@ -6,6 +6,9 @@ import user from "./modules/user";
 
 export default createStore<{}>({
   strict: true,
+  state: {
+    todos: []
+  },
   modules: { todos, auth, user },
   plugins: [
     createPersistedState({
