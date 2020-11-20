@@ -11,4 +11,14 @@ describe("TodoItem.vue", () => {
     });
     expect(wrapper.text()).toMatch(todoItem.title);
   });
+
+  it("does not render props.todoItem.description when passed", () => {
+    const todoItem = {
+        description: "hello, world!"
+    }
+    const wrapper = shallowMount(TodoItem, {
+      props: { todoItem }
+    });
+    expect(wrapper.text()).not.toMatch(todoItem.description);
+  });
 });
