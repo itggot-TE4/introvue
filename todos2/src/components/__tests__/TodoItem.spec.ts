@@ -44,4 +44,18 @@ describe("TodoItem.vue", () => {
     expect(pushFunction).toHaveBeenCalledWith(expect.objectContaining({ name: "Todo" }));
     expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } });
   });
+
+  it("renders correctly", () => {
+    const todoItem = {
+      id: 1,
+      title: "hello, world!",
+      description: "foobar",
+      isCompleted: true
+    }
+    const wrapper = shallowMount(TodoItem, {
+      props: { todoItem }
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
+})
 });
