@@ -21,4 +21,15 @@ describe("TodoItem.vue", () => {
     });
     expect(wrapper.text()).not.toMatch(todoItem.description);
   });
+
+  it("navigates to route /todos/<id> when clicked on", () => {
+    const todoItem = {
+        title: "hello, world!"
+    }
+    const wrapper = shallowMount(TodoItem, {
+        props: { todoItem }
+      });
+    wrapper.find('span').trigger("click");
+    expect(wrapper.text()).toMatch(todoItem.title);
+  });
 });
