@@ -24,6 +24,7 @@ describe("TodoItem.vue", () => {
 
   it("navigates to route /todos/<id> when clicked on", () => {
     const todoItem = {
+        id: 1,
         title: "hello, world!"
     }
 
@@ -40,6 +41,6 @@ describe("TodoItem.vue", () => {
         props: { todoItem }
       });
     wrapper.find('span').trigger("click");
-    expect(pushFunction).toHaveBeenCalled();
+    expect(pushFunction).toHaveBeenCalledWith(`/todos/${todoItem.id}`)
   });
 });
