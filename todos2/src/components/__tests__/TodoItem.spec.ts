@@ -41,6 +41,7 @@ describe("TodoItem.vue", () => {
       props: { todoItem }
     });
     wrapper.find('span').trigger("click");
-    expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } })
+    expect(pushFunction).toHaveBeenCalledWith(expect.objectContaining({ name: "Todo" }));
+    expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } });
   });
 });
