@@ -4,7 +4,7 @@ import TodoItem from "@/components/TodoItem.vue";
 describe("TodoItem.vue", () => {
   it("renders props.todoItem.title when passed", () => {
     const todoItem = {
-        title: "hello, world!"
+      title: "hello, world!"
     }
     const wrapper = shallowMount(TodoItem, {
       props: { todoItem }
@@ -14,7 +14,7 @@ describe("TodoItem.vue", () => {
 
   it("does not render props.todoItem.description when passed", () => {
     const todoItem = {
-        description: "hello, world!"
+      description: "hello, world!"
     }
     const wrapper = shallowMount(TodoItem, {
       props: { todoItem }
@@ -24,23 +24,23 @@ describe("TodoItem.vue", () => {
 
   it("navigates to route /todos/<id> when clicked on", () => {
     const todoItem = {
-        id: 1,
-        title: "hello, world!"
+      id: 1,
+      title: "hello, world!"
     }
 
     const pushFunction = jest.fn();
 
     const wrapper = shallowMount(TodoItem, {
-        global: {
-            mocks: {
-                $router: {
-                    push: pushFunction
-                }
-            }
-        },
-        props: { todoItem }
-      });
+      global: {
+        mocks: {
+          $router: {
+            push: pushFunction
+          }
+        }
+      },
+      props: { todoItem }
+    });
     wrapper.find('span').trigger("click");
-    expect(pushFunction).toHaveBeenCalledWith(`/todos/${todoItem.id}`)
+    expect(pushFunction).toHaveBeenCalledWith({ name: "Todo", params: { id: todoItem.id } })
   });
 });
