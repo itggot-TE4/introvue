@@ -1,4 +1,4 @@
-import { Module } from 'vuex';
+import { Module } from "vuex";
 import axios from "axios";
 
 export interface Todo {
@@ -9,7 +9,7 @@ export interface Todo {
 }
 
 export interface TodosState {
-  todos: Todo[]
+  todos: Todo[];
 }
 
 export default {
@@ -45,7 +45,10 @@ export default {
       }
     },
     async createTodo({ commit }, newTodo) {
-      const todo = await axios.post("http://localhost:9292/api/v1/todos", newTodo);
+      const todo = await axios.post(
+        "http://localhost:9292/api/v1/todos",
+        newTodo
+      );
 
       if (todo.data) {
         commit("addTodo", todo);

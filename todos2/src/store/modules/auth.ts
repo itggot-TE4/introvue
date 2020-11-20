@@ -1,8 +1,8 @@
-import { Module } from 'vuex';
+import { Module } from "vuex";
 import axios from "axios";
 
 export interface AuthState {
-  failure: string
+  failure: string;
 }
 
 export default {
@@ -19,19 +19,22 @@ export default {
     async authorize({ commit, dispatch }, credentials) {
       try {
         // TODO: set loading true
-        const resp = await axios.post("http://localhost:9292/api/v1/users/login", credentials);
+        const resp = await axios.post(
+          "http://localhost:9292/api/v1/users/login",
+          credentials
+        );
 
-        console.log("do i get here?")
-        dispatch('user/login', resp.data.token, { root:true })
+        console.log("do i get here?");
+        dispatch("user/login", resp.data.token, { root: true });
       } catch (err) {
-        commit('setFailure', err.message)
+        commit("setFailure", err.message);
       }
       // TODO: finally set loading false
     }
   },
   getters: {
     failure(state) {
-      return state.failure
+      return state.failure;
     }
   }
 } as Module<AuthState, {}>;

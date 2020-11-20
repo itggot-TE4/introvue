@@ -37,10 +37,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const token = store.getters['user/token'];
+  const token = store.getters["user/token"];
 
-  if (store.getters['todos/numTodos'] == 0 && token) {
-    store.dispatch('todos/fetchTodos');
+  if (store.getters["todos/numTodos"] == 0 && token) {
+    store.dispatch("todos/fetchTodos");
   }
 
   if (!token && to.fullPath != "/login") {
@@ -48,7 +48,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-
 });
 
 export default router;

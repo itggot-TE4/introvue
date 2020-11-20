@@ -20,7 +20,7 @@ export default {
         isComplete: false
       };
 
-      this.$store.dispatch('todos/createTodo', newTodo)
+      this.$store.dispatch("todos/createTodo", newTodo);
     }
   }
 };

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
   name: "TodoItem",
   props: ["todoItem"],
@@ -22,7 +22,7 @@ export default {
     showTodo() {
       this.$router.push({ name: "Todo", params: { id: this.todoItem.id } });
     },
-    ...mapActions('todos', ['delTodo', 'toggleCompleted'])
+    ...mapActions("todos", ["delTodo", "toggleCompleted"])
   }
 };
 </script>

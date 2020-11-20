@@ -6,19 +6,20 @@ import axios from "axios";
 
 axios.interceptors.request.use(
   config => {
-      const token = store.getters['user/token']
-      console.log(token);
-      if (token) {
-          config.headers['Authorization'] = 'Bearer ' + token;
-      }
-      config.headers['Content-Type'] = 'application/json';
+    const token = store.getters["user/token"];
+    console.log(token);
+    if (token) {
+      config.headers["Authorization"] = "Bearer " + token;
+    }
+    config.headers["Content-Type"] = "application/json";
 
-      console.log("am i being intercepted!?");
-      return config;
+    console.log("am i being intercepted!?");
+    return config;
   },
   error => {
-      Promise.reject(error)
-  });
+    Promise.reject(error);
+  }
+);
 
 createApp(App)
   .use(store)
